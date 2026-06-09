@@ -1,41 +1,48 @@
 pipeline {
 
-    agent any
 
-    tools {
-        maven 'Maven'
-        jdk 'Java'
-        // git 'Git'
-    }
+   agent any
 
-    stages {
 
-        stage('Checkout') {
-            steps {
-                echo '📥 Getting code...'
-                checkout scm
-            }
-        }
+   tools {
+       maven 'Maven'
+       jdk 'Java'
+       // git 'Git'
+   }
 
-        stage('Build') {
-            steps {
-                echo '🔨 Building...'
-                sh 'mvn clean compile'
-            }
-        }
 
-        stage('Test') {
-            steps {
-                echo '🧪 Testing...'
-                sh 'mvn test'
-            }
-        }
+   stages {
 
-        stage('Package') {
-            steps {
-                echo '📦 Creating JAR...'
-                sh 'mvn package -DskipTests'
-            }
-        }
-    }
+
+       stage('Checkout') {
+           steps {
+               echo '📥 Getting code...'
+               checkout scm
+           }
+       }
+
+
+       stage('Build') {
+           steps {
+               echo '🔨 Building...'
+               sh 'mvn clean compile'
+           }
+       }
+
+
+       stage('Test') {
+           steps {
+               echo '🧪 Testing...'
+               sh 'mvn test'
+           }
+       }
+
+
+       stage('Package') {
+           steps {
+               echo '📦 Creating JAR...'
+               sh 'mvn package -DskipTests'
+           }
+       }
+   }
 }
